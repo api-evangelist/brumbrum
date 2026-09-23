@@ -2,20 +2,25 @@ generated: '2026-07-18'
 method: searched
 source: live probes of https://www.brumbrum.it/.well-known/*
 host: https://www.brumbrum.it
-documents:
-- path: /.well-known/security.txt
-  status: 200
-  file: brumbrum-security.txt
-- path: /.well-known/openid-configuration
-  status: 403
-- path: /.well-known/oauth-authorization-server
-  status: 403
-- path: /.well-known/api-catalog
-  status: 403
-- path: /.well-known/ai-plugin.json
-  status: 403
-notes: >-
-  Only /.well-known/security.txt returned 200 (saved verbatim; note its Expires
-  date is 2021-12-31 so the published policy is stale). The remaining discovery
-  paths returned 403 from the site WAF rather than 404, so their absence is not
-  definitively confirmed.
+notes: Only /.well-known/security.txt returned 200 (saved verbatim; note its Expires date is 2021-12-31
+  so the published policy is stale). The remaining discovery paths returned 403 from the site WAF rather
+  than 404, so their absence is not definitively confirmed.
+hosts:
+- host: https://www.brumbrum.it
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: brumbrum-security.txt
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
